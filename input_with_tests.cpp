@@ -25,18 +25,29 @@
     }
 }
 
+void some_experiments()
+{
+    double number{};
+    bool OK = get_number(std::cin, number);
+    std::cout << OK << '\n';
+}
+
 void test_code()
 {
-    double value{};
-    std::stringstream some_input{"1"};
-    const bool ok = get_number(some_input, value);
-    assert(ok);
-    assert(value == 1);
-
-    double unused{};
-    std::stringstream bad_input{"q"};
-    const bool not_ok = get_number(bad_input, unused);
-    assert(!not_ok);
+    {
+        double value{};
+        std::stringstream some_input{"1"};
+        const bool ok = get_number(some_input, value);
+        assert(ok);
+        assert(value == 1);
+    }
+    
+    {
+        double value{};
+        std::stringstream bad_input{"q"};
+        const bool not_ok = get_number(bad_input, value);
+        assert(!not_ok);
+    }
 }
 
 int main()
