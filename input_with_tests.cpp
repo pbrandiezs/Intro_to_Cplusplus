@@ -1,8 +1,9 @@
 #include <cassert>
 #include <istream>
+#include <iostream>
 #include <sstream>
 
-bool get_number(std::istream & input_stream, double & number)
+[[nodiscard]] bool get_number(std::istream & input_stream, double & number)
 {
     input_stream >> number;
     if(input_stream)
@@ -32,4 +33,15 @@ void test_code()
 int main()
 {
     test_code();
+
+    double number{};
+    std::cout << "Please enter a number.\n>";
+    if(get_number(std::cin, number))
+    {
+        std::cout << "Got " << number << ", thanks!\n";
+    }
+    else
+    {
+        std::cout << "Something went wrong\n";
+    }
 }
