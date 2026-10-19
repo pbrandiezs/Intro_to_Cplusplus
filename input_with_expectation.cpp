@@ -17,7 +17,7 @@ int main()
 {
     std::cout << "Please enter a number.\n>";
     auto number = get_number(std::cin);  
-    if(number.has_value())  
+    if(number)  
     {
         std::cout << "Got " << number.value() << " thanks!\n"; 
     }
