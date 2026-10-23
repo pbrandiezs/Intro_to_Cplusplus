@@ -26,6 +26,27 @@ std::expected<double, std::string> get_number(std::istream & input_stream)
     return std::unexpected{"That's not a number"};
 }
 
+void show_numbers(const std::array<double, 5u> & numbers)
+{
+    for(const auto number: numbers) 
+    {
+        std::cout << number << '\n'; 
+    }
+}
+
+void max_number(const std::array<double, 5u> & numbers)
+{
+    double biggest = numbers[0]; 
+    for(const auto number: numbers) 
+    {
+        if(number > biggest) 
+	{
+            biggest = number; 
+	}
+    }
+    std::cout << "The biggest number is " << biggest << '\n'; 
+}
+
 int main()
 {
     std::cout << "Please enter some numbers.\n";
@@ -46,4 +67,6 @@ int main()
         }
         ++count; 
     }
+    show_numbers(numbers);
+    max_number(numbers);
 }
