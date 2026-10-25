@@ -1,0 +1,5 @@
+file(GLOB CPP_FILES "*.cpp")
+foreach(file ${CPP_FILES})
+    get_filename_component(target_name ${file} NAME_WE)
+    add_executable(${target_name} ${file})
+endforeach()
