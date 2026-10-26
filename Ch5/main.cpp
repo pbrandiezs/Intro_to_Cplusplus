@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
 
@@ -19,5 +20,11 @@ std::vector<double> get_prices(std::istream & input_stream)
 
 int main()
 {
-    auto prices = get_prices(std::cin); 
+    auto prices = get_prices(std::cin);
+    if(!prices.empty())
+    {
+        auto result = std::ranges::minmax(prices);
+        std::cout << "min " << result.min << '\n';
+        std::cout << "max " << result.max << '\n';
+    }
 }
