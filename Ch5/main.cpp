@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 
+#include "analysis.h"
 #include "input.h"
 
 std::vector<double> get_prices(std::istream & input_stream)
@@ -27,4 +28,6 @@ int main()
         std::cout << "min " << result.min << '\n';
         std::cout << "max " << result.max << '\n';
     }
+    auto invalid = std::ranges::count_if(prices, stock_prices::negative);
+    std::cout << invalid << " prices below zero\n";
 }
