@@ -30,4 +30,6 @@ int main()
     }
     auto invalid = std::ranges::count_if(prices, stock_prices::negative);
     std::cout << invalid << " prices below zero\n";
+    std::cout << "Average " << stock_prices::average(prices) << '\n';
+    stock_prices::test_analysis();
 }

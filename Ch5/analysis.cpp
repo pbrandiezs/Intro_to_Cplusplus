@@ -1,5 +1,7 @@
 #include <algorithm>
 #include <cassert>
+#include <numeric>
+#include <stdexcept>
 
 #include "analysis.h"
 
@@ -11,10 +13,30 @@ namespace stock_prices
         prices.erase(new_end, prices.end());
         return prices;
     }
+
+    double average(const std::vector<double> &prices)
+    {
+        if (prices.empty())
+            throw std::invalid_argument("Prices cannot be empty!");
+        return std::accumulate(prices.begin(), prices.end(), double{})/prices.size();
+    }
+
     void test_analysis()
     {
         auto got = remove_invalid({-1.2, 3.5});
         assert(got.size() == 1);
         assert(got[0] == 3.5);
+
+        try {
+            average({});
+            assert(false);
+        }
+        catch (std::exception &)
+        {
+        }
+
+        assert(average({1.0})==1.0);
     }
+
+
 }
