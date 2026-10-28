@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <functional>
 #include <iostream>
 #include <vector>
 
@@ -32,4 +33,36 @@ int main()
     std::cout << invalid << " prices below zero\n";
     std::cout << "Average " << stock_prices::average(prices) << '\n';
     stock_prices::test_analysis();
+    std::sort(prices.begin(), prices.end());
+    for(auto p: prices)
+    {
+        std::cout << p << '\n';
+    }
+    std::sort(prices.begin(), prices.end(), std::greater{});
+    std::cout << '\n';
+    for(auto p: prices)
+    {
+        std::cout << p << '\n';
+    }
+    std::ranges::sort(prices);
+    std::cout << '\n';
+    for(auto p: prices)
+    {
+        std::cout << p << '\n';
+    }
+
+    std::ranges::sort(prices, std::ranges::greater{});
+    std::cout << '\n';
+    for(auto p: prices)
+    {
+        std::cout << p << '\n';
+    }
+
+    auto iterator = std::ranges::find_if(prices,
+                             stock_prices::negative);
+    auto positive = std::vector(prices.begin(), iterator);
+    std::cout << '\n';
+    for(auto p: positive) {
+        std::cout << p << '\n';
+    }
 }
