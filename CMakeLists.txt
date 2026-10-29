@@ -7,3 +7,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Tell CMake to build the multi-file project in the Ch5 folder
 add_subdirectory(Ch1-4)
 add_subdirectory(Ch5)
+add_subdirectory(Ch6)
