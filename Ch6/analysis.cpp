@@ -37,6 +37,26 @@ namespace stock_prices
 
         assert(average({1.0})==1.0);
     }
+    double profit_on_first_uptick(const std::vector<double> & prices)
+    {
+        if(prices.empty())
+            throw std::invalid_argument("Prices cannot be empty");
+        const double first = prices.front();
+        auto where = std::ranges::find_if(prices,
+                [first] (double price)
+                {
+                   return price > first;
+                }
+            );
+        if(where != prices.end())
+        {
+            return *where - first;
+        }
+        else
+        {
+            return 0.0;
+        }
+    }
 
 
 }
