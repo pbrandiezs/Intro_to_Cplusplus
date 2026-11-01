@@ -58,5 +58,18 @@ namespace stock_prices
         }
     }
 
+    bool required_profit_possible(const std::vector<double> & prices,
+                              double required_profit)
+    {
+        const double first = prices.front();
+        auto where = std::ranges::find_if(prices,
+                            [first, required_profit] (double price)
+                            {
+                               return (price - first) >= required_profit;
+                            }
+                        );
+        return where != prices.end();
+    }
+
 
 }
