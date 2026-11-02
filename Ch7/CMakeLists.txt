@@ -1,1 +1,5 @@
-add_executable(ch7 main.cpp)
+add_executable(ch7 main.cpp
+    input.h
+    input.cpp
+)
+

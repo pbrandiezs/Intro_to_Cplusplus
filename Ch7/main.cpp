@@ -1,6 +1,8 @@
 #include <iostream>
 #include <random>
 
+#include "input.h"
+
 void random_experiment()
 {
     std::random_device rd{};
@@ -13,4 +15,11 @@ void random_experiment()
 int main()
 {
     random_experiment();
+    stock_prices::test_input();
+    const auto prices = stock_prices::get_prices(100.0, 10);
+    std::cout << "Got prices:\n";
+    for(double price: prices)
+    {
+        std::cout << price << '\n';
+    }
 }
