@@ -58,6 +58,32 @@ namespace stock_prices
         return prices;
     }
 
+    std::vector<double> get_prices(double price, size_t count, double volatility)
+    {
+        std::vector<double> prices(count);
+
+        std::random_device rd{};
+        std::default_random_engine gen{rd()};
+        std::normal_distribution distrib;
+
+        auto next_price = [volatility, &price, &gen, &distrib]()
+        {
+            double percent  = volatility * distrib(gen);
+            price += price * percent;
+            return price;
+        };
+        std::ranges::generate(prices.begin(), prices.end(), next_price);
+        return prices;
+    }
+
+    std::vector<double> get_prices(double price, size_t count,
+                std::function<double()> next_price)
+    {
+        std::vector<double> prices(count);
+        std::ranges::generate(prices.begin(), prices.end(), next_price);
+        return prices;
+    }
+
     void test_input()
     {
         std::stringstream no_input{""};

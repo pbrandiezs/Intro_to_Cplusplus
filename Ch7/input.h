@@ -12,6 +12,8 @@ namespace stock_prices
     std::vector<double> get_prices(std::istream & input_stream,
             std::function<void ()> prompt);
     std::vector<double> get_prices(double price, size_t count);
-
+    std::vector<double> get_prices(double price, size_t count, double volatility);
+    std::vector<double> get_prices(double price, size_t count,
+                    std::function<double()> next_price);
     void test_input();
 } 
