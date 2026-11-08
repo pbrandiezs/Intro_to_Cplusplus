@@ -27,10 +27,28 @@ void write_to_file(const std::vector<double> & prices,
     }
 }
 
+void read_from_file(const std::string & filename)
+{
+    std::ifstream file{filename};
+    if(file)
+    {
+        auto prices = stock_prices::get_prices(file, [](){});
+        for(auto price: prices)
+        {
+            std::cout << price << '\n';
+        }
+    }
+    else
+    {
+        throw std::runtime_error("Failed to read from file");
+    }
+}
+
 int main()
 {
     try {
         write_to_file(stock_prices::get_prices(100.0, 10, 0.05), "prices.txt");
+        read_from_file("prices.txt");
         return 0;
     }
     catch (const std::exception & e) {
