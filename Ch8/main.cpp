@@ -11,7 +11,7 @@ void write_to_file(const std::vector<double> & prices,
 {
     const std::filesystem::path path = std::filesystem::current_path();
     const auto fully_pathed_filename = path / filename;
-    std::ofstream file{filename};
+    std::ofstream file{filename, std::ios::out | std::ios::app};
     if(file)
     {
         for(auto price: prices)
