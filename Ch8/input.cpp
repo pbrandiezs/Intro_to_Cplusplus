@@ -1,8 +1,10 @@
 #include <algorithm>
 #include <cassert>
+#include <fstream>
 #include <limits>
 #include <random>
 #include <sstream>
+#include <stdexcept>
 
 #include "input.h"
 
@@ -82,6 +84,19 @@ namespace stock_prices
         std::vector<double> prices(count);
         std::ranges::generate(prices.begin(), prices.end(), next_price);
         return prices;
+    }
+
+    std::vector<double> read_from_file(const std::string & filename)
+    {
+        std::ifstream file{filename};
+        if(file)
+        {
+            return get_prices(file, [](){});
+        }
+        else
+        {
+            throw std::runtime_error("Failed to read to file");
+        }
     }
 
     void test_input()

@@ -46,12 +46,25 @@ void read_from_file(const std::string & filename)
 
 int main()
 {
-    try {
-        write_to_file(stock_prices::get_prices(100.0, 10, 0.05), "prices.txt");
-        read_from_file("prices.txt");
+    try
+    {
+        double first_price{100.00};
+        const std::string filename = "prices.txt";
+        if(std::filesystem::exists(filename))
+        {
+            auto prices = stock_prices::read_from_file(filename);
+            if(!prices.empty())
+            {
+                first_price = prices.back();
+                std::cout <<"Read " << prices.size() << " prices\n";
+            }
+        }
+        write_to_file(stock_prices::get_prices(first_price, 10, 0.05),
+            filename);
         return 0;
     }
-    catch (const std::exception & e) {
+    catch(const std::exception & e)
+    {
         std::cout << e.what() << '\n';
         return 1;
     }
