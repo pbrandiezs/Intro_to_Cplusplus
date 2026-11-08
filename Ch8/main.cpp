@@ -1,3 +1,4 @@
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
@@ -8,6 +9,8 @@
 void write_to_file(const std::vector<double> & prices,
         const std::string & filename)
 {
+    const std::filesystem::path path = std::filesystem::current_path();
+    const auto fully_pathed_filename = path / filename;
     std::ofstream file{filename};
     if(file)
     {
@@ -15,10 +18,12 @@ void write_to_file(const std::vector<double> & prices,
         {
             file << price << '\n';
         }
-        std::cout << "Wrote to prices.txt\n";
+        std::cout <<"Wrote to " << fully_pathed_filename << '\n';
     }
     else {
-        throw std::runtime_error{"Failed to write to prices.txt"};
+        auto error_message = "Failed to write to " +
+        fully_pathed_filename.string();
+        throw std::runtime_error(error_message);
     }
 }
 
