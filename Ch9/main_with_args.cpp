@@ -1,13 +1,13 @@
 #include <iostream>
-#include <string>
+#include <string_view>
 
-void show_characters_before(const std::string & value,
+void show_characters_before(std::string_view value,
         char character)
 {
     auto position = value.find(character);
     if(position != std::string::npos)
     {
-        std::string partial = value.substr(0, position);
+        std::string_view partial = value.substr(0, position);
         std::cout << "Before " << character <<  ": " << partial<< '\n';
     }
     else
