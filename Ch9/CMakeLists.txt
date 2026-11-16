@@ -1,2 +1,5 @@
-add_executable(ch9 main_with_args.cpp
+add_executable(ch9
+        input.h
+        input.cpp
+        main.cpp
 )
