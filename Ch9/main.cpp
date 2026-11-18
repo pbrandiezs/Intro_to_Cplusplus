@@ -1,3 +1,5 @@
+#include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <print>
 #include <stdexcept>
@@ -49,10 +51,35 @@ void trading_game(const std::vector<double> & prices) {
     std::println("Total profit ${:.2f}", funds - initial_funds);
 }
 
+void write_to_file_improved(const std::vector<double> & prices,
+        const std::string & filename)
+{
+    const std::filesystem::path path = std::filesystem::current_path();
+    const auto fully_pathed_filename = path / filename;
+    std::ofstream file{filename};
+    if(file)
+    {
+        for(auto price: prices)
+        {
+            std::println(file, "{:.2f}",price);
+        }
+        std::println("Wrote to {}", fully_pathed_filename.string());
+    }
+    else
+    {
+        throw std::runtime_error(
+                   std::format("Failed to write to {}",
+                       fully_pathed_filename.string()
+                   )
+        );
+    }
+}
+
 int main(int argc, char *argv[])
 {
     using namespace stock_prices;
     const auto prices = (argc>1) ? read_from_file(argv[1]) :
                                    get_prices(100.0, 10, 0.05);
+    write_to_file_improved(prices, "prices.txt");
     trading_game(prices);
 }
